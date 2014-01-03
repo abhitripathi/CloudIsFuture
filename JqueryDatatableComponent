@@ -14,7 +14,6 @@
   
     <!-- attributes to be called on page -->  
     <apex:attribute name="listOfRecords" description="list Of Records" type="Object[]" required="false"/> 
-    <apex:attribute name="objectName" description="Object that queried" type="string" required="true"/>   
     <apex:attribute name="fieldHeader" description="field Header" type="String" required="false" assignTo="{!columnHeader}"/>      
       
     <!-- reference to the static resource -->  
