@@ -1,0 +1,34 @@
+/**
+  * Description     :   Controller for Datable Component.   
+  *
+  * Created By      :   Abhi Tripathi
+  *
+  * Created Date    :   12/27/2013
+  *
+  * Version         :   V1.0  
+  *
+  **/ 
+public with sharing class ComponentDemo {
+    
+    //String
+    public String columnHeader{get;set;}
+    
+    //List
+    public List<String> fieldLabel{
+        get {
+            return columnTitle(); 
+        }
+    }
+     
+    //List string   
+    public List<String> columnTitle() { 
+        
+        //String declaration & memory allocation 
+        List<String> selectedColumnTitle  = new List<String>();
+        
+        //List to get columns value as a array.
+        selectedColumnTitle = columnHeader.split(',');
+        
+        return selectedColumnTitle; 
+    }
+}
