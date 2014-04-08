@@ -1,0 +1,73 @@
+/**
+ *    Description    :    Dynamic Look-up having lookup of all the object in the Org.
+ *
+ *    Created By     :    Abhi Tripathi
+ *
+ *    Created Date   :    4/8/2014
+ *
+ *    Version        :    V1.0
+ **/
+public with sharing class DynamicLookupController {
+
+	//Select Option for objects
+    public List<SelectOption> options { get; set; }
+    
+    //Boolean
+    public Boolean IsSelected { get; set; }
+    
+    //Variable to hold the selected value
+    public String selectedValue { get; set; }
+    
+    //vaiable to hold value of Id
+    public String valueToUpdate { get; set; }
+    
+    //variable to hold the prefix of the Object Id
+    public String strKeyPrefix { get; set; }
+    
+    /**
+     *    Description    :    Method to get the selected Name of the object and get its prefix.
+     *
+     *    @args          :  
+     *
+     *    @return        :  
+    **/
+    public void updateLookupField(){
+    
+		if( selectedValue != null && selectedValue != ''){
+            IsSelected = true;
+            
+            //Assigning values
+            strKeyPrefix =  String.valueOf(selectedValue) ;   
+            System.debug('@@@@@@@@@@@' +selectedValue );
+       
+        } else {
+            IsSelected = false;
+        }
+    }
+    
+    //Constructor
+    public DynamicLookupController() {
+    
+		//Initiallizing
+        IsSelected = false;
+        
+        //memory allocation and default value assignment
+        options = new List<SelectOption>();
+        options.add(new SelectOption('','--Select One--'));                                                                 
+        
+        //Loop through sObject list using schema methods
+        for(Schema.SObjectType sobj : Schema.getGlobalDescribe().Values()) {
+            schema.DescribeSObjectResult f = sobj.getDescribe();
+          
+            //filtering the sobject list 
+            if(f.isDeletable() && f.isQueryable() && f.isUpdateable() && f.isAccessible() && f.getkeyPrefix() != Null){
+          
+                //populate list with options
+                options.add(new SelectOption(f.getkeyPrefix(), f.getLabel()));
+            }
+        } 
+        
+        //sorting the list alphabetially   
+        options.sort();
+    }  
+}
