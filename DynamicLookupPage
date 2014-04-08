@@ -43,14 +43,13 @@
                                </input>
                                    
                                <td class="dataCol col02">
-									<input type="hidden" name="opp4_lkid" id="opp4_lkid" value="000000000000000"></input>
-									<apex:inputHidden value="{!valueToUpdate}" id="updateValue"/>
-									<input type="hidden" name="opp4_lkold" id="opp4_lkold" value="null"></input>
-									<input type="hidden" name="opp4_lktp" id="opp4_lktp" value="{!strKeyPrefix}"></input>
-									<input type="hidden" name="opp4_lspf" id="opp4_lspf" value="0"></input>
-									<input type="hidden" name="opp4_lspfsub" id="opp4_lspfsub" value="0"></input>
-									<input type="hidden" name="opp4_mod" id="opp4_mod" value="0"></input>
-                                  
+				    <input type="hidden" name="opp4_lkid" id="opp4_lkid" value="000000000000000"></input>
+				    <apex:inputHidden value="{!valueToUpdate}" id="updateValue"/>
+				    <input type="hidden" name="opp4_lkold" id="opp4_lkold" value="null"></input>
+				    <input type="hidden" name="opp4_lktp" id="opp4_lktp" value="{!strKeyPrefix}"></input>
+				    <input type="hidden" name="opp4_lspf" id="opp4_lspf" value="0"></input>
+				    <input type="hidden" name="opp4_lspfsub" id="opp4_lspfsub" value="0"></input>
+				    <input type="hidden" name="opp4_mod" id="opp4_mod" value="0"></input>
                                </td>
                         </div> 
                     </apex:outputPanel>
