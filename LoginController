@@ -1,0 +1,65 @@
+/** 
+  * Description     :   Login Page controller.
+  *
+  * Created By      :   Abhi Tripathi 
+  *                
+  * Created Date    :   2/4/2014    
+  *
+  * Revision Log    :   V1.0
+  **/
+public without sharing class LoginController {
+      
+    //Email Id and Password
+    public String emailId { get; set; }  
+    public String password { get; set; }
+
+    //Constructor  
+    public LoginController() {
+    
+	//Initiallizing the variables
+        emailId = '';
+        password = '';
+    }
+
+    /**
+     * @Description  :  Method used when user tries to get loggin.
+     *
+     * @args         :  
+     *
+     * @return       :  PageReference
+     *
+    **/    
+    public PageReference login() {
+
+	//Check the values entered by the user
+        if(emailId != Null && emailId != '' && password != Null && password != '') {
+                  
+            //Query on Contact records Weather the email id Entered by the user exists
+            contact = [ Select Email, Password__c From Contact Where Email =: emailId LIMIT 1];
+            
+            //Check for Contact
+            if(contact.size() > 0) {
+            
+                //Comparing password from the database
+                if( contact[0].Password__c.compareTo(password) == 0) {
+        
+		    //Page Url set
+                    PageReference newPage = New PageReference('/apex/YOUR-NEXT-PAGE-AFTER-LOGIN');
+
+                    //Reinitiallize all the atribute by this
+                    newPage.setRedirect(false);
+                        
+                    //Return to page
+                    return newPage;
+            
+                } else {
+                    
+                    //Message method when no field is filled
+                    ApexPages.addMessage(new ApexPages.message(ApexPages.severity.ERROR, 'ERROR MESSAGES' ));
+                }
+            }
+        }
+        
+        return null;
+    }
+}
