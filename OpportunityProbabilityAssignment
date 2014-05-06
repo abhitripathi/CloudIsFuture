@@ -1,0 +1,46 @@
+<!--
+/**
+ *  Description     :   Opportunity Probability assignement w.r.t. Stage field as standard functionality.
+ *
+ *  Created By      :   Abhi Tripathi
+ * 
+ *  Created Date    :   4/9/2014
+ *
+ *  Version         :   V1_0
+ **/
+-->
+<apex:page standardController="Opportunity" id="page">
+ 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js" />
+	<script src="/soap/ajax/29.0/connection.js" type="text/javascript"></script>
+	<script src="/soap/ajax/29.0/apex.js" type="text/javascript"></script>
+	 
+	<script>
+		sforce.connection.sessionId = "{!$Api.Session_ID}";
+		 
+		function processChange(){
+		 
+			var obj = document.getElementById('{!$Component.page.frm.pb.pbs.stageFieldId}');
+			var p = document.getElementById('{!$Component.page.frm.pb.pbs.probabilityFieldId}');
+			 
+			var qr = sforce.connection.query("Select DefaultProbability From OpportunityStage where MasterLabel = '" + $(obj).val() + "'") ; 
+			records = qr.getArray("records");
+			 
+			for (var i=0; i< records.length; i++) {
+				var record = records[i];
+				$(p).val(record.DefaultProbability);
+				break;
+			}
+			return true;
+		}
+	</script>
+	 
+	<apex:form id="frm">
+		<apex:pageblock id="pb">
+			<apex:pageblockSection id="pbs" title="Your Opportunity" columns="1">
+				<apex:inputField value="{!Opportunity.StageName}" onchange="processChange()" id="stageFieldId" />
+				<apex:inputField value="{!Opportunity.Probability}" id="probabilityFieldId"/>
+			</apex:pageblockSection>
+		</apex:pageblock>
+	</apex:form>
+</apex:page>
