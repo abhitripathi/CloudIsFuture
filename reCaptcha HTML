@@ -1,0 +1,52 @@
+<form action="http://www.google.com/recaptcha/api/verify" method="POST" target="_self" id="form">
+    
+    <!-- script to fetch clients IP-->
+    <script type="text/javascript" src="https://l2.io/ip.js?var=myip">
+        document.getElementsByName("remoteip")[0].value=myip;
+    </script>
+           
+    <!-- Script to assign parameter for the verification -->            
+    <script type="text/javascript">
+        function checkChallenge() {
+            var challenge = document.getElementsByName('recaptcha_challenge_field')[0].value;
+            document.getElementsByName("challenge")[0].value=challenge;
+            var response= document.getElementsByName('recaptcha_response_field')[0].value;
+            document.getElementsByName("response")[0].value=response;
+        }
+        var RecaptchaOptions = {
+            theme : 'white'
+        };
+    </script>
+    
+    <!-- parameter to send for verification -->
+    <input type="hidden" name="privatekey" value="--YOUR PRIVATE KEY--"/>
+    <input type="hidden" name="remoteip"/>
+    <input type="hidden" name="challenge"/>
+    <input type="hidden" name="response"/>
+    
+    <div>
+        <p>Name</p>
+        <input name="name" type="text"></input> <br></br>
+    </div>
+    <div>
+        <p>E-Mail </p>
+        <input name="email" type="text"></input><br></br>
+    </div>
+
+    <div>
+        <br></br>
+
+        <!-- script for recaptcha -->
+        <script type="text/javascript" src="https://www.google.com/recaptcha/api/challenge?k=--YOUR PUBLIC KEY--"></script>
+        <script type="text/javascript" src="https://www.google.com/js/th/SUdiaCY6jH4b3dZl65iOKBdM6RP8EE5Op-iH6W7KEFM.js"></script>
+        <noscript>
+            <iframe src="https://www.google.com/recaptcha/api/noscript?k=--YOUR PUBLIC KEY--" id="captchaWidget" height="300" width="500" frameborder="0"></iframe><br/>
+            <textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
+            <input type="hidden" name="recaptcha_response_field" value="manual_challenge"/>
+        </noscript>
+    </div>
+    <div>
+        <br></br>
+        <input name="submit" type="submit" value="Send!" onclick="checkChallenge();"></input>
+    </div>
+</form>
